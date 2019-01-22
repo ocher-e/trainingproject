@@ -1,0 +1,89 @@
+package by.academy.timetable.controller;
+
+import by.academy.timetable.model.TimetableSystem;
+import by.academy.timetable.model.User;
+import by.academy.timetable.service.TimetableSystemService;
+import by.academy.timetable.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+public class TimetableController {
+    
+    @Autowired
+    TimetableSystemService timetableService;
+    
+    @Autowired
+    UserService userService;
+    
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String homePage(ModelMap model) {
+        String currentUserName = getPrincipal();
+        User currentUser = userService.findByName(currentUserName);
+        timetableService.updateCurrentUser(currentUser);
+        return "home";
+    }
+    
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){    
+                new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        timetableService.updateCurrentUser(null);
+        return "redirect:/login?logout";
+    }    
+    
+    @RequestMapping(value = "/timetable", method = RequestMethod.GET)
+    public String getTimetable(ModelMap model) {
+        model.addAttribute("myTimetable", timetableService.findOne(1));
+        return "timetable";
+    }
+    
+    @RequestMapping(value = "/settimetable", method = RequestMethod.GET)
+    public String newProperties(ModelMap model) {
+        System.out.println("In Get");
+        TimetableSystem timetable = new TimetableSystem();
+        model.addAttribute("timetableData", timetable);
+        return "setTimetable";
+    }
+
+    @RequestMapping(value="/settimetable", method = RequestMethod.POST)
+    public String addProperties(@Valid @ModelAttribute("timetableData") TimetableSystem timetable, BindingResult result, ModelMap model) {
+        System.out.println("In Post");
+        if(result.hasErrors()) {
+            return "setTimetable";
+        }
+        timetable.setTimetableId(1);
+        timetableService.add(timetable);
+        model.addAttribute("success", "Entering timetable properties:"
+                + " 1. Count of rooms =" + timetable.getCountOfRooms() 
+                + "; 2. Pairs a day =" + timetable.getPairsInDay()
+                        + " completed successfully");
+        return "successAction";
+    }
+    
+    private String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+                userName = ((UserDetails)principal).getUsername();
+        } else {
+                userName = principal.toString();
+        }
+        return userName;
+    }
+}
