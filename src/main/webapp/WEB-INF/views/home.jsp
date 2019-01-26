@@ -17,7 +17,7 @@
         <!--Visible to professors only-->
         <sec:authorize access="hasRole('ROLE_USER')">
            <h2><a href="<c:url value="/addrequest" />" > Add request </a></h2> 
-           <h2><a href="<c:url value="/show-prof" />" > Show personal timetable </a></h2>
+           <h2><a href="<c:url value="/show-prof/${pageContext.request.userPrincipal.name}" />" > Show personal timetable </a></h2>
         </sec:authorize>
            
         <!--Visible to admin only--> 

@@ -1,4 +1,4 @@
-CREATE DATABESE IF NOT EXISTS university2;
+CREATE DATABASE IF NOT EXISTS university2;
 
 USE university2;
 

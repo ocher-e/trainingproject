@@ -23,9 +23,13 @@ public class ProfessorService {
         return (List<Professor>) repository.findAll();
     }
     
-    @Transactional
+    @Transactional(readOnly = true)
     public Professor findOne(Integer id) {
         return repository.findOne(id);
     }
     
+    @Transactional(readOnly = true)
+    public Professor findProfessorByLogin(String login) {
+        return repository.findProfessorByLogin(login);
+    }
 }

@@ -1,5 +1,6 @@
 package by.academy.timetable.service;
 
+import by.academy.timetable.model.Professor;
 import by.academy.timetable.model.Request;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,13 @@ public class SheduleService {
     public ArrayList<List<Request>> week4Group(int groupNumber) {
         int workDaysInWeek = 5;
         int pairsInDay = timetableService.findOne(1).getPairsInDay();
+        int sumOfPairsForGroup = requestService.getSumOfPairsForGroup(groupNumber);
+        
+        // если суммарное число пар в запросах не равно указанному произведению, то вернуть null
+        if (sumOfPairsForGroup != (workDaysInWeek * pairsInDay)) {
+            return null;
+        }
+        
         // контейнер для расписания
         ArrayList<List<Request>> shedule = new ArrayList<>(pairsInDay);
         for(int i = 0; i < pairsInDay; i++) {
@@ -46,18 +54,24 @@ public class SheduleService {
         ArrayList<Request> pairsContainer = preparePairsContainer(groupNumber);
         // наполняем расписание
         for(int j = 0; j < pairsInDay; j++) {
-            System.out.println(" week= " + j);
             for(int i = 0; i < workDaysInWeek; i++) {
-                System.out.println(" day= " + i);
                 Request curPair = pairsContainer.remove(0);
                 // получаем ссылку на неделю и добавляем реквест с парой i раз
-                System.out.println(" size of pairsContainer= " + pairsContainer.size());
                 shedule.get(j).add(curPair);
             }
         }
         return shedule;
     }
     
-    
+    public boolean included(ArrayList<List<Request>> shedule, Professor prof) {
+        for(int i = 0; i < shedule.size(); i++) {
+            for(Request r : shedule.get(i)) {
+                if(r.getRequester().equals(prof)) {
+                    return true;
+                }
+            }
+        }
+        return false;  
+    }
     
 }
