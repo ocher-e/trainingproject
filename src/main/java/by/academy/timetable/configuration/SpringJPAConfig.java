@@ -1,7 +1,10 @@
 package by.academy.timetable.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -12,15 +15,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableJpaRepositories(basePackages = "by.academy.timetable.repository")
 @EnableTransactionManagement
+@PropertySource("classpath:app.properties")
 public class SpringJPAConfig {
+    
+    @Autowired
+    Environment env;
     
     @Bean
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/university2");
-        ds.setUsername("");
-        ds.setPassword("");
+        ds.setDriverClassName(env.getProperty("db.driverClassName"));
+        ds.setUrl(env.getProperty("db.url"));
+        ds.setUsername(env.getProperty("db.username"));
+        ds.setPassword(env.getProperty("db.password"));
         return ds;
     }
     
@@ -31,9 +38,9 @@ public class SpringJPAConfig {
         emFB.setDataSource(this.dataSource());
         
         HibernateJpaVendorAdapter jpaAdapter = new HibernateJpaVendorAdapter();
-        jpaAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
-        jpaAdapter.setGenerateDdl(true);
-        jpaAdapter.setShowSql(true);
+        jpaAdapter.setDatabasePlatform(env.getProperty("jpa.dialect"));
+        jpaAdapter.setGenerateDdl(Boolean.parseBoolean(env.getProperty("generateDDL")));
+        jpaAdapter.setShowSql(Boolean.parseBoolean(env.getProperty("showSQL")));
         
         emFB.setJpaVendorAdapter(jpaAdapter);
         return emFB;
