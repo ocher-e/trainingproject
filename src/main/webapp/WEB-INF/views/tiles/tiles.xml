@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+
+<tiles-definitions>
+    <!-- Base Definition -->
+    <definition name="base-definition" 
+       template="/WEB-INF/views/tiles/layouts/layout.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/views/tiles/template/header.jsp" />  
+       <put-attribute name="menu" value="/WEB-INF/views/tiles/template/menu.jsp" /> 
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/footer.jsp" />  
+   </definition>
+   <!-- Home Page -->
+   <definition name="home" extends="base-definition">  
+       <put-attribute name="title" value="Welcome" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/home.jsp" />  
+   </definition>
+   <!--Requests-->
+   <definition name="requests" extends="base-definition">
+       <put-attribute name="title" value="Requests"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/requests.jsp"/>
+   </definition>
+   <!--Add request-->
+   <definition name="addrequest" extends="base-definition">
+       <put-attribute name="title" value="Add request"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/addrequest.jsp"/>
+   </definition>
+   <!--Professors-->
+   <definition name="professors" extends="base-definition">
+       <put-attribute name="title" value="Professors"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/professors.jsp"/>
+   </definition>
+   <!--Add professor-->
+   <definition name="addprof" extends="base-definition">
+       <put-attribute name="title" value="Add professor"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/addprof.jsp"/>
+   </definition>
+   <!--University settings-->
+   <definition name="timetable" extends="base-definition">
+       <put-attribute name="title" value="University settings"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/timetable.jsp"/>
+   </definition>
+   <!--Set university settings-->
+   <definition name="settimetable" extends="base-definition">
+       <put-attribute name="title" value="Set up university"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/settimetable.jsp"/>
+   </definition>
+   <!--Group timetable-->
+   <definition name="groupShedule" extends="base-definition">
+       <put-attribute name="title" value="Student`s timetable"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/groupShedule.jsp"/>
+   </definition>
+   <!--Professor timetable-->
+   <definition name="profShedule" extends="base-definition">
+       <put-attribute name="title" value="Professor`s timetable"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/profShedule.jsp"/>
+   </definition>
+   <!--No credential page-->
+   <definition name="noCredentials" extends="base-definition">
+       <put-attribute name="title" value="Denied"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/noCredentials.jsp"/>
+   </definition>
+   <!--Success action page-->
+   <definition name="successAction" extends="base-definition">
+       <put-attribute name="title" value="Done successfully"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/successAction.jsp"/>
+   </definition>
+   <!--Users-->
+   <definition name="users" extends="base-definition">
+       <put-attribute name="title" value="Users"/>
+       <put-attribute name="body" value="/WEB-INF/views/pages/users.jsp"/>
+   </definition>
+</tiles-definitions>

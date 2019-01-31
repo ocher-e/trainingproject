@@ -66,6 +66,6 @@ public class RequestController {
     
     @RequestMapping(value = "/denied", method = RequestMethod.GET)
 	public String accessDeniedPage(ModelMap model) {
-            return "nocredentials";
+            return "noCredentials";
 	}
 }

@@ -1,13 +1,10 @@
 package by.academy.timetable.service;
 
-import by.academy.timetable.model.Admin;
-import by.academy.timetable.model.Professor;
 import by.academy.timetable.model.User;
 import by.academy.timetable.repository.UserRepository;
 import java.util.Collection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,11 +54,5 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findUserByLogin(String login) {
         return repository.findUserByLogin(login);
-    }
-    
-    @Transactional
-    @PreAuthorize("hasRole('ADMIN')")
-    public void deleteUser(Integer id) {
-        repository.delete(id);
     }
 }

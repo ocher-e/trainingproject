@@ -54,24 +54,21 @@ public class TimetableController {
     
     @RequestMapping(value = "/settimetable", method = RequestMethod.GET)
     public String newProperties(ModelMap model) {
-        System.out.println("In Get");
         TimetableSystem timetable = new TimetableSystem();
         model.addAttribute("timetableData", timetable);
-        return "setTimetable";
+        return "settimetable";
     }
 
     @RequestMapping(value="/settimetable", method = RequestMethod.POST)
     public String addProperties(@Valid @ModelAttribute("timetableData") TimetableSystem timetable, BindingResult result, ModelMap model) {
-        System.out.println("In Post");
         if(result.hasErrors()) {
-            return "setTimetable";
+            return "settimetable";
         }
         timetable.setTimetableId(1);
         timetableService.add(timetable);
-        model.addAttribute("success", "Entering timetable properties:"
-                + " 1. Count of rooms =" + timetable.getCountOfRooms() 
-                + "; 2. Pairs a day =" + timetable.getPairsInDay()
-                        + " completed successfully");
+        model.addAttribute("success", "Completed successfully."
+                + " Count of rooms =" + timetable.getCountOfRooms() 
+                + "; Pairs a day =" + timetable.getPairsInDay());
         return "successAction";
     }
     

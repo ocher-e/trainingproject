@@ -7,22 +7,26 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "by.academy.timetable")
 class MyAppConfiguration extends WebMvcConfigurerAdapter {
     @Bean
-    public ViewResolver viewResolver() {
-            InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-            viewResolver.setViewClass(JstlView.class);
-            viewResolver.setPrefix("/WEB-INF/views/");
-            viewResolver.setSuffix(".jsp");
-            return viewResolver;
+    public TilesConfigurer tilesConfigurer(){
+        TilesConfigurer tilesConfigurer = new TilesConfigurer();
+        tilesConfigurer.setDefinitions(new String[] {"/WEB-INF/views/**/tiles.xml"});
+        tilesConfigurer.setCheckRefresh(true);
+        return tilesConfigurer;
     }
-        
+    
+    @Bean
+    public ViewResolver viewResolver() {
+        return new TilesViewResolver();
+    }
+    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");

@@ -8,15 +8,11 @@ import by.academy.timetable.repository.UserRepository;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,10 +28,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         
         User user = userRepository.findUserByLogin(username);
-//        ApplicationContext context = new AnnotationConfigApplicationContext(SpringJPAConfig.class);
-//        UserService userService = context.getBean(UserService.class);
-//        User user = userService.fingByLogin(username);
-        
         
         if(user != null) {
             if(user instanceof Admin) grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
@@ -44,6 +36,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         
         throw new UsernameNotFoundException("User not found");
-//        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
     }
 }
