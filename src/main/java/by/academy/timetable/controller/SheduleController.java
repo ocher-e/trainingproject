@@ -33,9 +33,10 @@ public class SheduleController {
     }
     
     
-    @RequestMapping(value = "/show-prof/{profLogin}", method = RequestMethod.GET)
-    public String sheduleForProfessorInAllGroups(@PathVariable String profLogin, ModelMap model) {
-        Professor currentProfessor = professorService.findProfessorByLogin(profLogin);
+    @RequestMapping(value = "/show-prof", method = RequestMethod.GET)
+    public String sheduleForProfessorInAllGroups(ModelMap model) {
+        String currentProfLogin = ControllerUtil.getPrincipal();
+        Professor currentProfessor = professorService.findProfessorByLogin(currentProfLogin);
         if(sheduleService.week4Group(1)== null) {
             model.addAttribute("shedule1IsNotFormed", true);
         } else {

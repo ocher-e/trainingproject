@@ -30,7 +30,7 @@ public class TimetableController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homePage(ModelMap model) {
-        String currentUserName = getPrincipal();
+        String currentUserName = ControllerUtil.getPrincipal();
         User currentUser = userService.findByName(currentUserName);
         timetableService.updateCurrentUser(currentUser);
         return "home";
@@ -72,15 +72,15 @@ public class TimetableController {
         return "successAction";
     }
     
-    private String getPrincipal(){
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-                userName = ((UserDetails)principal).getUsername();
-        } else {
-                userName = principal.toString();
-        }
-        return userName;
-    }
+//    private String getPrincipal(){
+//        String userName = null;
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        if (principal instanceof UserDetails) {
+//                userName = ((UserDetails)principal).getUsername();
+//        } else {
+//                userName = principal.toString();
+//        }
+//        return userName;
+//    }
 }

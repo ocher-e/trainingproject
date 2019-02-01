@@ -2,7 +2,7 @@ package by.academy.timetable.controller;
 
 import by.academy.timetable.model.Professor;
 import by.academy.timetable.model.Request;
-import by.academy.timetable.repository.ProfessorRepository;
+import by.academy.timetable.service.ProfessorService;
 import by.academy.timetable.service.RequestService;
 import by.academy.timetable.service.SheduleService;
 import by.academy.timetable.service.TimetableSystemService;
@@ -25,7 +25,7 @@ public class RequestController {
     TimetableSystemService timetableService;
     
     @Autowired
-    ProfessorRepository professorRepository;
+    ProfessorService professorService;
     
     @Autowired
     SheduleService sheduleService;
@@ -49,9 +49,9 @@ public class RequestController {
             return "addrequest";
 	}
         request.setTimetable(timetableService.findOne(1));
-        
-        Professor someProf = (Professor) timetableService.findOne(1).getCurrentUser();
-        request.setRequester(someProf);
+        String currentProfLogin = ControllerUtil.getPrincipal();
+        Professor currentProf = professorService.findProfessorByLogin(currentProfLogin);
+        request.setRequester(currentProf);
         requestService.add(request);
         model.addAttribute("success", "Entering request for " + request.getDiscipline()
                         + " completed successfully");

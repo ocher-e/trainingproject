@@ -4,13 +4,13 @@
 <nav>
     <ul id="menu">
         <!--Visibility is not limited-->
-        <li><a href="<c:url value="/professors" />" > All professors </a></li>
         <li><a href="<c:url value="/requests" />" > All requests </a></li>
                 
         <!--Visible to professors only-->
         <sec:authorize access="hasRole('ROLE_USER')">
+           <li><a href="<c:url value="/professors" />" > All professors </a></li>            
            <li><a href="<c:url value="/addrequest" />" > Add request </a></li> 
-           <li><a href="<c:url value="/show-prof/${pageContext.request.userPrincipal.name}" />" > Show personal timetable </a></li>
+           <li><a href="<c:url value="/show-prof" />" > Show personal timetable </a></li>
         </sec:authorize>
            
         <!--Visible to admin only--> 

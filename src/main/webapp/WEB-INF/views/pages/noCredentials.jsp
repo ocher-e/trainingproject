@@ -7,6 +7,4 @@
         You entered as <sec:authentication property="principal.username"/> 
         and  you have no credential for this action
     </h2>
-    <a href="<c:url value="/logout" />" > Logout</a> 
-
 </div>
