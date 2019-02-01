@@ -30,19 +30,11 @@ public class TimetableController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homePage(ModelMap model) {
-        String currentUserName = ControllerUtil.getPrincipal();
-        User currentUser = userService.findByName(currentUserName);
-        timetableService.updateCurrentUser(currentUser);
         return "home";
     }
     
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){    
-                new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        timetableService.updateCurrentUser(null);
         return "redirect:/login?logout";
     }    
     
@@ -72,15 +64,4 @@ public class TimetableController {
         return "successAction";
     }
     
-//    private String getPrincipal(){
-//        String userName = null;
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//        if (principal instanceof UserDetails) {
-//                userName = ((UserDetails)principal).getUsername();
-//        } else {
-//                userName = principal.toString();
-//        }
-//        return userName;
-//    }
 }

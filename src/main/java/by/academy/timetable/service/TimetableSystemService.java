@@ -27,12 +27,4 @@ public class TimetableSystemService {
     public TimetableSystem findOne(Integer id) {
         return (TimetableSystem) repository.findOne(id);
     }
-    
-    @Transactional
-    public void updateCurrentUser(User u) {
-        TimetableSystem t = findOne(1);
-        t.setCurrentUser(u);
-        add(t);
-    }
-    
 }

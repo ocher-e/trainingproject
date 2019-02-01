@@ -2,17 +2,14 @@ package by.academy.timetable.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -24,18 +21,7 @@ public class TimetableSystem implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "F_TIMETABLE_ID", unique = true, nullable = false)
     private Integer timetableId;
-    
-    @OneToMany(mappedBy="timetable", cascade = CascadeType.ALL)
-    private Set<User> users = new HashSet<>(0);
-    
-    @OneToMany(mappedBy = "timetable")
-    private Set<Request> requests = new LinkedHashSet<>(0);
-    
-    // однонаправленная ассоциация
-    @OneToOne
-    @JoinColumn(name="FK_USER_ID", nullable= true)
-    private User currentUser;
-    
+        
     @Column(name = "F_COUNT_OF_ROOMS")
     @Min(2)
     @Max(5)
@@ -45,12 +31,14 @@ public class TimetableSystem implements Serializable {
     @Min(1)
     @Max(3)
     private int pairsInDay;
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "timetable")
+    private Set<User> users = new HashSet<User>(0);
 
     public TimetableSystem() {
     }
 
-    public TimetableSystem(User currentUser, int countOfRooms, int pairsInDay) {
-        this.currentUser = currentUser;
+    public TimetableSystem(int countOfRooms, int pairsInDay) {
         this.countOfRooms = countOfRooms;
         this.pairsInDay = pairsInDay;
     }
@@ -61,30 +49,6 @@ public class TimetableSystem implements Serializable {
 
     public void setTimetableId(Integer timetableId) {
         this.timetableId = timetableId;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public Set<Request> getRequests() {
-        return requests;
-    }
-
-    public void setRequests(Set<Request> requests) {
-        this.requests = requests;
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
     }
 
     public int getCountOfRooms() {
@@ -102,10 +66,18 @@ public class TimetableSystem implements Serializable {
     public void setPairsInDay(int pairsInDay) {
         this.pairsInDay = pairsInDay;
     }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
     
     @Override
     public String toString() {
-        return "TimetableSystem{" + "timetableId=" + timetableId + ", currentUser=" + currentUser + ", countOfRooms=" + countOfRooms + ", pairsInDay=" + pairsInDay + '}';
+        return "TimetableSystem{" + "timetableId=" + timetableId + ", countOfRooms=" + countOfRooms + ", pairsInDay=" + pairsInDay + '}';
     }
     
 }

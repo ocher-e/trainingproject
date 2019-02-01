@@ -1,6 +1,6 @@
 INSERT INTO t_timetable
-        (F_TIMETABLE_ID, F_COUNT_OF_ROOMS, F_PAIRS_IN_DAY, FK_USER_ID)
-VALUES (NULL, 5, 3, NULL);
+        (F_TIMETABLE_ID, F_COUNT_OF_ROOMS, F_PAIRS_IN_DAY)
+VALUES (NULL, 5, 3);
 
 INSERT INTO t_user
         (F_USER_ID, F_LOGIN, F_NAME, F_PASSWORD, F_TIMETABLE_ID)
@@ -18,16 +18,16 @@ INSERT INTO t_admin VALUES(1);
 INSERT INTO t_professor VALUES(2), (3), (4), (5), (6), (7), (8);
 
 INSERT INTO t_request
-       (F_REQUEST_ID, F_DISCIPLINE, F_PAIRS_IN_WEEK, F_GROUP, F_USER_ID, F_TIMETABLE_ID)
-VALUES (null, "Math", 3, 1, 2, 1),
-       (null, "Math", 3, 2, 2, 1),
-       (null, "Phis", 2, 1, 2, 1),
-       (null, "Mater", 3, 1, 3, 1),
-       (null, "Mech", 3, 1, 3, 1),
-       (null, "Lang", 2, 1, 4, 1),
-       (null, "Lang", 2, 2, 4, 1),
-       (null, "Econ", 3, 2, 5, 1),
-       (null, "Accou", 3, 2, 5, 1),
-       (null, "Socio", 2, 2, 6, 1),
-       (null, "Manag", 2, 2, 7, 1),
-       (null, "Graph", 2, 1, 8, 1);
+       (F_REQUEST_ID, F_DISCIPLINE, F_PAIRS_IN_WEEK, F_GROUP, F_USER_ID)
+VALUES (null, "Math", 3, 1, 2),
+       (null, "Math", 3, 2, 2),
+       (null, "Phis", 2, 1, 2),
+       (null, "Mater", 3, 1, 3),
+       (null, "Mech", 3, 1, 3),
+       (null, "Lang", 2, 1, 4),
+       (null, "Lang", 2, 2, 4),
+       (null, "Econ", 3, 2, 5),
+       (null, "Accou", 3, 2, 5),
+       (null, "Socio", 2, 2, 6),
+       (null, "Manag", 2, 2, 7),
+       (null, "Graph", 2, 1, 8);

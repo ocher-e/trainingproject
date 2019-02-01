@@ -48,7 +48,6 @@ public class RequestController {
         if (result.hasErrors()) {
             return "addrequest";
 	}
-        request.setTimetable(timetableService.findOne(1));
         String currentProfLogin = ControllerUtil.getPrincipal();
         Professor currentProf = professorService.findProfessorByLogin(currentProfLogin);
         request.setRequester(currentProf);

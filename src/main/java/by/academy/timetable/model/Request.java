@@ -41,19 +41,14 @@ public class Request implements Serializable {
     @Max(3)
     private int pairsinweek;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "F_TIMETABLE_ID", nullable = false)
-    private TimetableSystem timetable;
-
     public Request() {
     }
 
-    public Request(Professor requester, String discipline, int studgroup, int pairsinweek, TimetableSystem timetable) {
+    public Request(Professor requester, String discipline, int studgroup, int pairsinweek) {
         this.requester = requester;
         this.discipline = discipline;
         this.studgroup = studgroup;
         this.pairsinweek = pairsinweek;
-        this.timetable = timetable;
     }
 
     public Integer getRequestId() {
@@ -94,14 +89,6 @@ public class Request implements Serializable {
 
     public void setPairsinweek(int pairsinweek) {
         this.pairsinweek = pairsinweek;
-    }
-
-    public TimetableSystem getTimetable() {
-        return timetable;
-    }
-
-    public void setTimetable(TimetableSystem timetable) {
-        this.timetable = timetable;
     }
     
     @Override
