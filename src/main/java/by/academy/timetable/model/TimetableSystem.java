@@ -32,6 +32,11 @@ public class TimetableSystem implements Serializable {
     @Max(3)
     private int pairsInDay;
     
+    @Column(name = "F_WORK_DAYS_IN_WEEK")
+    @Min(1)
+    @Max(5)
+    private int workDaysInWeek;
+    
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "timetable")
     private Set<User> users = new HashSet<User>(0);
 
@@ -67,6 +72,14 @@ public class TimetableSystem implements Serializable {
         this.pairsInDay = pairsInDay;
     }
 
+    public int getWorkDaysInWeek() {
+        return workDaysInWeek;
+    }
+
+    public void setWorkDaysInWeek(int workDaysInWeek) {
+        this.workDaysInWeek = workDaysInWeek;
+    }
+
     public Set<User> getUsers() {
         return users;
     }
@@ -74,10 +87,10 @@ public class TimetableSystem implements Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-    
+
     @Override
     public String toString() {
-        return "TimetableSystem{" + "timetableId=" + timetableId + ", countOfRooms=" + countOfRooms + ", pairsInDay=" + pairsInDay + '}';
+        return "TimetableSystem{" + "timetableId=" + timetableId + ", countOfRooms=" + countOfRooms + ", pairsInDay=" + pairsInDay + ", workDaysInWeek=" + workDaysInWeek + '}';
     }
-    
+ 
 }

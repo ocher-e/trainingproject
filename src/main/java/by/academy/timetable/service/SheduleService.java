@@ -2,6 +2,7 @@ package by.academy.timetable.service;
 
 import by.academy.timetable.model.Professor;
 import by.academy.timetable.model.Request;
+import by.academy.timetable.model.TimetableSystem;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,9 @@ public class SheduleService {
     }
     
     public ArrayList<List<Request>> week4Group(int groupNumber) {
-        int workDaysInWeek = 5;
-        int pairsInDay = timetableService.findOne(1).getPairsInDay();
+        TimetableSystem currentSettings = timetableService.findOne(1);
+        int workDaysInWeek = currentSettings.getWorkDaysInWeek();
+        int pairsInDay = currentSettings.getPairsInDay();
         int sumOfPairsForGroup = requestService.getSumOfPairsForGroup(groupNumber);
         
         // если суммарное число пар в запросах не равно указанному произведению, то вернуть null

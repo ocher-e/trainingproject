@@ -12,5 +12,8 @@
         <tr>
             <th>Pairs<br>a day</th><td>${myTimetable.pairsInDay}</td>
         </tr>
+        <tr>
+            <th>Workdays<br>a week</th><td>${myTimetable.workDaysInWeek}</td>
+        </tr>
     </table>
 </div>

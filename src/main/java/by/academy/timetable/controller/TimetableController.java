@@ -60,7 +60,8 @@ public class TimetableController {
         timetableService.add(timetable);
         model.addAttribute("success", "Completed successfully."
                 + " Count of rooms =" + timetable.getCountOfRooms() 
-                + "; Pairs a day =" + timetable.getPairsInDay());
+                + "; Pairs a day =" + timetable.getPairsInDay()
+                + "; Workdays a week = " + timetable.getWorkDaysInWeek());
         return "successAction";
     }
     
