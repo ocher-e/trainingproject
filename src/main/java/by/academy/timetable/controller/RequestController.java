@@ -1,16 +1,20 @@
 package by.academy.timetable.controller;
 
+import by.academy.timetable.exception.ArgumentIsGreaterThanItShouldBe;
 import by.academy.timetable.model.Professor;
 import by.academy.timetable.model.Request;
 import by.academy.timetable.service.ProfessorService;
 import by.academy.timetable.service.RequestService;
 import by.academy.timetable.service.SheduleService;
 import by.academy.timetable.service.TimetableSystemService;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,12 +50,19 @@ public class RequestController {
     @RequestMapping(value="/addrequest", method = RequestMethod.POST)
     public String addRequest(@Valid @ModelAttribute("newRequest") Request request, BindingResult result, ModelMap model) { 
         if (result.hasErrors()) {
+            System.out.println("myObjectName" + result.getObjectName());
             return "addrequest";
 	}
         String currentProfLogin = ControllerUtil.getPrincipal();
         Professor currentProf = professorService.findProfessorByLogin(currentProfLogin);
         request.setRequester(currentProf);
-        requestService.add(request);
+        try {
+            
+            requestService.add(request);
+        } catch (ArgumentIsGreaterThanItShouldBe ex) {
+            result.addError(new FieldError("newRequest", "pairsinweek", "Too great value"));
+            return "addrequest";
+        }
         model.addAttribute("success", "Entering request for " + request.getDiscipline()
                         + " completed successfully");
         return "successAction";

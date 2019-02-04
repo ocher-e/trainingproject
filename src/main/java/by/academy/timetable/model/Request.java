@@ -38,7 +38,7 @@ public class Request implements Serializable {
     
     @Column(name = "F_PAIRS_IN_WEEK")
     @Min(1)
-    @Max(3)
+    @Max(5)
     private int pairsinweek;
     
     public Request() {

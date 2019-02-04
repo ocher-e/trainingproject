@@ -41,8 +41,8 @@ public class SheduleService {
         int pairsInDay = currentSettings.getPairsInDay();
         int sumOfPairsForGroup = requestService.getSumOfPairsForGroup(groupNumber);
         
-        // если суммарное число пар в запросах не равно указанному произведению, то вернуть null
-        if (sumOfPairsForGroup != (workDaysInWeek * pairsInDay)) {
+        // если суммарное число меньше, чем указанноу произведение, то вернуть null
+        if (sumOfPairsForGroup < (workDaysInWeek * pairsInDay)) {
             return null;
         }
         
