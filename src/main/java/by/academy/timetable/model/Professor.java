@@ -4,6 +4,7 @@ package by.academy.timetable.model;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -22,7 +23,7 @@ public class Professor extends User implements Serializable {
         super(name, login, password, timetable);
     }
   
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "requester")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "requester")
     private Set<Request> requests = new HashSet<Request>(0);
 
     public Set<Request> getRequests() {

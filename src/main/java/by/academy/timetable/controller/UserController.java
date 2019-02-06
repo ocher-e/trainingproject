@@ -5,6 +5,7 @@ import by.academy.timetable.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,4 +23,9 @@ public class UserController {
             return "users";
     }
     
+    @RequestMapping(value="delete-user/{userId}", method = RequestMethod.GET) 
+    public String deleteProfessor(@PathVariable int userId, ModelMap model) {
+        userService.delete(userService.findOne(userId));
+        return "redirect:/users";
+    }
 }
