@@ -1,13 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div>
 
  	<div class="form-container">
  	
- 	<h1>Request entering form</h1>
+            <h1>
+                <spring:message code="addrequest.form_heading"/>
+            </h1>
  	
 	<form:form method="POST" modelAttribute="newRequest" class="form-horizontal">
             
@@ -15,7 +18,9 @@
         
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label class="col-md-3 control-lable" for="discipline">Discipline</label>
+                    <label class="col-md-3 control-lable" for="discipline">
+                        <spring:message code="addrequest.discipline"/>
+                    </label>
                     <div class="col-md-7">
                         <form:input type="text" path="discipline" id="discipline" class="form-control input-sm"/>
                         <div class="has-error">
@@ -27,7 +32,9 @@
 
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label class="col-md-3 control-lable" for="studgroup">Group</label>
+                    <label class="col-md-3 control-lable" for="studgroup">
+                        <spring:message code="addrequest.group"/>
+                    </label>
                     <div class="col-md-7">
                         <form:input type="text" path="studgroup" id="studgroup" class="form-control input-sm"/>
                         <div class="has-error">
@@ -39,7 +46,9 @@
 
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label class="col-md-3 control-lable" for="pairsinweek">Pairs in week</label>
+                    <label class="col-md-3 control-lable" for="pairsinweek">
+                        <spring:message code="addrequest.pairs"/>
+                    </label>
                     <div class="col-md-7">
                         <form:input type="text" path="pairsinweek" id="pairsinweek" class="form-control input-sm"/>
                         <div class="has-error">

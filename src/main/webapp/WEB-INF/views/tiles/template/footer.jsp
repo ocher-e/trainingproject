@@ -1,4 +1,7 @@
+<%@page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <div>
     <br>
-    Training progect of Eugene Ocheretyanko
+    <spring:message code="footer.copyright"/>
 </div>

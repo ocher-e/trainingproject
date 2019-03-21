@@ -28,17 +28,17 @@ public class Request implements Serializable {
     private Professor requester;
     
     @Column(name = "F_DISCIPLINE")
-    @Size(min=3, max=10, message="The discipline name must be between 3 and 10 characters long.")
+    @Size(min=3, max=10, message="{request.discipline.size}")
     private String discipline;
     
     @Column(name = "F_GROUP")
-    @Min(1)
-    @Max(2)
+    @Min(value=1, message="{request.sudgroup.min}")
+    @Max(value=2, message="{request.sudgroup.max}")
     private int studgroup;
     
     @Column(name = "F_PAIRS_IN_WEEK")
-    @Min(1)
-    @Max(5)
+    @Min(value=1, message="{request.pairsinweek.min}")
+    @Max(value=5, message="{request.pairsinweek.max}")
     private int pairsinweek;
     
     public Request() {

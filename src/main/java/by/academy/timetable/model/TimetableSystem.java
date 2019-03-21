@@ -23,18 +23,18 @@ public class TimetableSystem implements Serializable {
     private Integer timetableId;
         
     @Column(name = "F_COUNT_OF_ROOMS")
-    @Min(2)
-    @Max(5)
+    @Min(value=2, message="{timetablesystem.countofrooms.min}")
+    @Max(value=5, message="{timetablesystem.countofrooms.max}")
     private int countOfRooms;
     
     @Column(name = "F_PAIRS_IN_DAY")
-    @Min(1)
-    @Max(3)
+    @Min(value=1, message="{timetablesystem.pairsinday.min}")
+    @Max(value=3, message="{timetablesystem.pairsinday.max}")
     private int pairsInDay;
     
     @Column(name = "F_WORK_DAYS_IN_WEEK")
-    @Min(1)
-    @Max(5)
+    @Min(value=1, message="{timetablesystem.workdaysinweek.min}")
+    @Max(value=5, message="{timetablesystem.workdaysinweek.max}")
     private int workDaysInWeek;
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "timetable")

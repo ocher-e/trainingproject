@@ -1,17 +1,27 @@
 <%@page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <div>   
-    <h2>Timetable for ${pageContext.request.userPrincipal.name}</h2>
+    <h2>
+        <spring:message code="profShedule.timetable_for"/> ${pageContext.request.userPrincipal.name}
+    </h2>
     <c:choose>
         <c:when test="${shedule1IsNotFormed}">
-            <h3>Timetable for group 1 is not formed yet</h3>
+            <h3>
+                <spring:message code="profShedule.timetable_not_formed_1"/>
+            </h3>
         </c:when>
         <c:otherwise>
             <c:if test="${professorIsInThisShedule1}">
                 <table>
-                    <caption>In group 1 </caption>
+                    <caption><spring:message code="profShedule.table_caption_1"/> </caption>
                     <tr>
-                        <th>Pair</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thurthday</th><th>Friday</th>
+                        <th><spring:message code="profShedule.pair"/></th>
+                        <th><spring:message code="profShedule.mn"/></th>
+                        <th><spring:message code="profShedule.tue"/></th>
+                        <th><spring:message code="profShedule.wen"/></th>
+                        <th><spring:message code="profShedule.th"/></th>
+                        <th><spring:message code="profShedule.fr"/></th>
                     </tr>
                     <c:forEach var = "week" items="${week4Group1}" varStatus="loop">
                     <tr>
@@ -36,14 +46,21 @@
     <br>
     <c:choose>
         <c:when test="${shedule2IsNotFormed}">
-            <h3>Timetable for group 2 is not formed yet</h3>
+            <h3>
+                <spring:message code="profShedule.timetable_not_formed_2"/>
+            </h3>
         </c:when>
         <c:otherwise>
             <c:if test="${professorIsInThisShedule2}">
                 <table>
-                    <caption>In group 2 </caption>
+                    <caption><spring:message code="profShedule.table_caption_2"/></caption>
                     <tr>
-                        <th>Pair</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thurthday</th><th>Friday</th>
+                        <th><spring:message code="profShedule.pair"/></th>
+                        <th><spring:message code="profShedule.mn"/></th>
+                        <th><spring:message code="profShedule.tue"/></th>
+                        <th><spring:message code="profShedule.wen"/></th>
+                        <th><spring:message code="profShedule.th"/></th>
+                        <th><spring:message code="profShedule.fr"/></th>
                     </tr>
                     <c:forEach var = "week" items="${week4Group2}" varStatus="loop">
                     <tr>

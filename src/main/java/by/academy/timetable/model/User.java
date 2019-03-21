@@ -26,15 +26,15 @@ public class User implements Serializable {
     private Integer userId;
     
     @Column(name = "F_NAME")
-    @NotEmpty
+    @NotEmpty(message="{user.name.empty}")
     private String name;
     
     @Column(name = "F_LOGIN")
-    @Size(min=4, max=12)
+    @Size(min=4, max=12, message="{user.login.size}")
     private String login;
     
     @Column(name = "F_PASSWORD")
-    @Size(min=4, max=12)
+    @Size(min=4, max=12, message="{user.password.size}")
     private String password;
     
     @ManyToOne(fetch = FetchType.EAGER)
